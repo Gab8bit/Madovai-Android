@@ -497,7 +497,7 @@
     <p class="tagline">"Madovai" — ma dove vai? Ora anche su Android.</p>
     <p class="lead">Cotral (bus e treni extraurbani) e Atac/Roma TPL (trasporto urbano di Roma) insieme, in tempo reale: posizione dei mezzi, orari, ritardi. App Android nativa, in Material You — niente account, niente configurazione, si apre e si usa.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://github.com/Gab8bit/Madovai-Android/releases/latest/download/Madovai-v1.0.0.apk" id="download-btn">
+      <a class="btn btn-primary download-btn" href="https://github.com/Gab8bit/Madovai-Android/releases/latest" id="download-btn">
         ⬇ Scarica l'app (APK)
       </a>
       <a class="btn btn-ghost" href="#install">Come si installa?</a>
@@ -603,14 +603,14 @@
       <ol class="steps">
         <li>
           <div>
-            <strong>Scarica Madovai-v1.0.0.apk dal telefono</strong>
+            <strong>Scarica l'APK di Madovai dal telefono</strong>
             <span>Con il pulsante qui sotto, dal browser del telefono (es. Chrome). Se il browser avvisa che il file "potrebbe essere dannoso", scegli <em>Scarica comunque</em>: succede con qualsiasi APK scaricato fuori dal Play Store.</span>
           </div>
         </li>
         <li>
           <div>
             <strong>Apri il file scaricato</strong>
-            <span>Tocca la notifica di download completato, oppure apri l'app <em>File</em> / <em>Download</em> e tocca <em>Madovai-v1.0.0.apk</em>.</span>
+            <span>Tocca la notifica di download completato, oppure apri l'app <em>File</em> / <em>Download</em> e tocca il file <em>Madovai-….apk</em> appena scaricato.</span>
           </div>
         </li>
         <li>
@@ -633,7 +633,7 @@
         </li>
       </ol>
       <div style="margin-top:32px; text-align:center;">
-        <a class="btn btn-primary" href="https://github.com/Gab8bit/Madovai-Android/releases/latest/download/Madovai-v1.0.0.apk">⬇ Scarica Madovai-v1.0.0.apk</a>
+        <a class="btn btn-primary download-btn" href="https://github.com/Gab8bit/Madovai-Android/releases/latest">⬇ Scarica l'APK di Madovai</a>
       </div>
       <p class="note">Perché non il Play Store? Pubblicarci richiede un account sviluppatore Google Play e la verifica dell'identità presso Google. Non è escluso in futuro — per ora l'APK diretto è la via più semplice.</p>
       <p class="note">Aggiornamenti: quando esce una nuova versione, scarica il nuovo APK dalla <a href="https://github.com/Gab8bit/Madovai-Android/releases" style="color:var(--text-dim)">pagina delle release</a> e installalo sopra quello vecchio: preferiti e dati già scaricati restano.</p>
@@ -656,6 +656,18 @@
 </footer>
 
 <script>
+  // Download buttons: the HTML href is the "latest release" page (works without JS); once
+  // the GitHub API answers, swap in the .apk asset of whatever the latest release is, so
+  // the page never needs editing when a new version (with a new asset name) is published.
+  fetch('https://api.github.com/repos/Gab8bit/Madovai-Android/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' } })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(release => {
+      const apk = (release.assets || []).find(a => /\.apk$/i.test(a.name));
+      if (!apk) return;
+      document.querySelectorAll('.download-btn').forEach(a => { a.href = apk.browser_download_url; });
+    })
+    .catch(() => { /* keep the releases-page fallback */ });
+
   // Scroll-reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
