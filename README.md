@@ -84,7 +84,9 @@ Poi:
 
 **Test end-to-end sui feed reali (opzionale):** `./gradlew testDebugUnitTest -PliveTests` fa girare il vero data layer (GTFS Cotral + Atac, PIV.do, ASTRAL, GTFS-RT) sulla JVM, senza emulatore. È opt-in perché scarica ~60 MB di GTFS (~300 MB una volta estratti, in `app/build/live-gtfs`, riusati nelle esecuzioni successive).
 
-**Firma e aggiornamenti:** l'APK pubblicato è una build *debug*, firmata con la chiave di debug locale (`~/.android/debug.keystore`, generata dalla prima build). Android installa un aggiornamento sopra una versione esistente **solo se la firma è la stessa**: se quel keystore va perso, la release successiva sarà firmata con una chiave diversa e chi l'ha installata dovrà disinstallare (perdendo i preferiti) prima di reinstallare. Conservare `~/.android/debug.keystore`, o passare a un keystore di release dedicato prima della prossima versione.
+**Build di release:** `./gradlew assembleRelease` (stesse variabili `JAVA_HOME`/`ANDROID_HOME` di sopra) produce `app/build/outputs/apk/release/app-release.apk`, minificato con R8 e con le risorse inutilizzate rimosse (regole in [`app/proguard-rules.pro`](app/proguard-rules.pro): osmdroid e protobuf-java non includono regole proprie e vengono mantenuti per intero).
+
+> **Firma delle release.** Le release sono firmate con una keystore dedicata, conservata privatamente fuori dal repository — non quella di debug generata automaticamente da Android. Android installa un aggiornamento sopra una versione esistente **solo se la firma è la stessa**, quindi tutte le versioni future vanno firmate con questa stessa chiave. Di conseguenza una release firmata si può produrre solo sulla macchina del maintainer: altrove `assembleRelease` genera un APK senza firma, mentre la build debug (`./build_apk.sh`) funziona ovunque.
 
 ## Problemi incontrati (da sapere se ci rimetti le mani)
 
