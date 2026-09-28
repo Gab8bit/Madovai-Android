@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+
+    <!--
+      Cotral's internal live-data endpoint (PIV.do / Automezzi.do) and its GTFS zips are
+      plain HTTP on travel.mob.cotralspa.it:7777 — no TLS available there (the :4443 HTTPS
+      port has a certificate whose SAN doesn't cover this host). Mirrors the iOS app's ATS
+      exception: cleartext is allowed for this one host ONLY.
+    -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">travel.mob.cotralspa.it</domain>
+    </domain-config>
+
+    <!--
+      ASTRAL's server (gestionecorse.astralspa.it) sends only its leaf certificate, without
+      the "Sectigo Public Server Authentication CA OV R36" intermediate. iOS/macOS fetch a
+      missing intermediate automatically (AIA); Android does not, so every ASTRAL call would
+      fail TLS. The genuine public intermediate (from the AIA URL in ASTRAL's own cert,
+      sha256 65:42:D1:76:…:85:30, valid to 2036) is bundled and trusted for this host only.
+      Normal validation (hostname, expiry, signature) still applies.
+    -->
+    <domain-config>
+        <domain includeSubdomains="false">gestionecorse.astralspa.it</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="@raw/astral_sectigo_ov_r36" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

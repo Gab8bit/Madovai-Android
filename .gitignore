@@ -1,0 +1,20 @@
+# Gradle / build outputs
+.gradle/
+build/
+*/build/
+.kotlin/
+
+# Machine-specific
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Build artifacts (build_apk.sh regenerates the debug APK)
+*.apk
+*.aab
+*.ap_
+*.dex
