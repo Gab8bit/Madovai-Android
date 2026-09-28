@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72" width="512" height="512">
+  <!-- Flat export of the Android adaptive icon (res/drawable/ic_launcher_background.xml +
+       ic_launcher_foreground.xml), cropped to the 72dp visible area of the 108dp canvas. -->
+  <defs>
+    <linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="20" y1="0" x2="70" y2="108">
+      <stop offset="0" stop-color="#7FAEE3"/>
+      <stop offset="0.45" stop-color="#2F63AE"/>
+      <stop offset="1" stop-color="#102452"/>
+    </linearGradient>
+  </defs>
+  <rect x="18" y="18" width="72" height="72" rx="16" fill="url(#bg)"/>
+  <!-- route (glow + line + light centre) -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M25,73 C33,66 40,63 50,64 C62,65 71,61 74,51 C76,45 78,42 80,40" stroke="#5CC3C6" stroke-opacity="0.333" stroke-width="11"/>
+    <path d="M25,73 C33,66 40,63 50,64 C62,65 71,61 74,51 C76,45 78,42 80,40" stroke="#5CC3C6" stroke-width="6.5"/>
+    <path d="M25,73 C33,66 40,63 50,64 C62,65 71,61 74,51 C76,45 78,42 80,40" stroke="#E6FAFA" stroke-opacity="0.8" stroke-width="1.4"/>
+  </g>
+  <!-- destination pin -->
+  <path fill="#5CC3C6" d="M80,26.5 a6.5,6.5 0 1,0 0.01,0 z M76.2,35.5 L80,40.5 L83.8,35.5 z"/>
+  <path fill="#E9F4F6" d="M80,30.5 a2.5,2.5 0 1,0 0.01,0 z"/>
+  <!-- wheels -->
+  <path fill="#14192A" d="M44,58.5 a4.5,4.5 0 1,0 0.01,0 z M63,58.5 a4.5,4.5 0 1,0 0.01,0 z"/>
+  <path fill="#9AA6BD" d="M44,61.5 a1.5,1.5 0 1,0 0.01,0 z M63,61.5 a1.5,1.5 0 1,0 0.01,0 z"/>
+  <!-- bus body -->
+  <path fill="#E0A03E" d="M39,39 H67 A6,6 0 0 1 73,45 V56 A6,6 0 0 1 67,62 H39 A6,6 0 0 1 33,56 V45 A6,6 0 0 1 39,39 Z"/>
+  <path fill="#FFFFFF" fill-opacity="0.2" d="M39,39 H67 A6,6 0 0 1 73,45 V46 H33 V45 A6,6 0 0 1 39,39 Z"/>
+  <!-- windows -->
+  <path fill="#F6F1E6" d="M39.5,43 h6 a2,2 0 0 1 2,2 v5 a2,2 0 0 1 -2,2 h-6 a2,2 0 0 1 -2,-2 v-5 a2,2 0 0 1 2,-2 z"/>
+  <path fill="#F6F1E6" d="M51,43 h6 a2,2 0 0 1 2,2 v5 a2,2 0 0 1 -2,2 h-6 a2,2 0 0 1 -2,-2 v-5 a2,2 0 0 1 2,-2 z"/>
+  <path fill="#F6F1E6" d="M62.5,43 h6 a2,2 0 0 1 2,2 v5 a2,2 0 0 1 -2,2 h-6 a2,2 0 0 1 -2,-2 v-5 a2,2 0 0 1 2,-2 z"/>
+  <!-- headlight -->
+  <path fill="#F7E3A6" d="M65.5,55.5 h4 a1.5,1.5 0 0 1 0,3 h-4 a1.5,1.5 0 0 1 0,-3 z"/>
+</svg>
